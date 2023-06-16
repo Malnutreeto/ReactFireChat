@@ -3,6 +3,7 @@ import { auth, provider } from '../firebase-config.js';
 import { signInWithPopup } from 'firebase/auth';
 import { Grid } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 
 
 import Cookies from 'universal-cookie';
@@ -38,6 +39,18 @@ const Auth = (props) => {
                 minHeight="100vh"
                 flexDirection="column"
             >
+                <Grid
+        marginBottom={2}
+        color="orange"
+                 >
+                    <h1>
+                        React Fire Chat 
+                        <LocalFireDepartmentIcon 
+                        style={{marginLeft: "10px",fontSize: "30px"}}
+                        />
+                    </h1>
+                    
+                </Grid>
                 <Grid
                 marginBottom={1}
                 >
