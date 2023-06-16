@@ -3,7 +3,7 @@ import { auth, provider } from '../firebase-config.js';
 import { signInWithPopup } from 'firebase/auth';
 import { Grid } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
-import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
 
 
 import Cookies from 'universal-cookie';
@@ -40,19 +40,21 @@ const Auth = (props) => {
                 flexDirection="column"
             >
                 <Grid
-        marginBottom={2}
-        color="orange"
-                 >
+                    marginBottom={2}
+                    color="#4c983b"
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                >
                     <h1>
-                        React Fire Chat 
-                        <LocalFireDepartmentIcon 
-                        style={{marginLeft: "10px",fontSize: "30px"}}
-                        />
+                        Malnutreeto Chatroom
                     </h1>
-                    
+                    <EmojiFoodBeverageIcon
+                            style={{ marginLeft: "10px", fontSize: "30px" }}
+                        />
                 </Grid>
                 <Grid
-                marginBottom={1}
+                    marginBottom={1}
                 >
                     <p>
                         Sign In with Google to Continue:
@@ -60,9 +62,9 @@ const Auth = (props) => {
                 </Grid>
 
                 <Grid>
-                    <button 
-                    className='auth-button'
-                    onClick={signInWithGoogle}>
+                    <button
+                        className='auth-button'
+                        onClick={signInWithGoogle}>
                         <GoogleIcon />
                     </button>
                 </Grid>
