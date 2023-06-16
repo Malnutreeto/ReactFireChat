@@ -1,6 +1,9 @@
 import '../styles/Auth.css';
 import { auth, provider } from '../firebase-config.js';
 import { signInWithPopup } from 'firebase/auth';
+import { Grid } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
+
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies()
@@ -8,7 +11,7 @@ const cookies = new Cookies()
 
 const Auth = (props) => {
 
-    const {setIsAuth} = props;
+    const { setIsAuth } = props;
 
 
     const signInWithGoogle = async () => {
@@ -27,19 +30,32 @@ const Auth = (props) => {
 
     return (
         <>
-    
-        <div className='auth'>
-            <p>
-                Sign In with Google to Continue
-            </p>
-            <button onClick={signInWithGoogle}>
-                Sign In with Google
-            </button>
-        </div>
-        
-         
+
+            <Grid
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                minHeight="100vh"
+                flexDirection="column"
+            >
+                <Grid
+                marginBottom={1}
+                >
+                    <p>
+                        Sign In with Google to Continue:
+                    </p>
+                </Grid>
+
+                <Grid>
+                    <button 
+                    className='auth-button'
+                    onClick={signInWithGoogle}>
+                        <GoogleIcon />
+                    </button>
+                </Grid>
+            </Grid>
         </>
-      
+
     );
 };
 
