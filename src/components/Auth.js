@@ -2,7 +2,6 @@ import '../styles/Auth.css';
 import { auth, provider } from '../firebase-config.js';
 import { signInWithPopup } from 'firebase/auth';
 
-
 import Cookies from 'universal-cookie';
 const cookies = new Cookies()
 //per settare, prendere e rimuovere cookies dal browser
@@ -27,6 +26,8 @@ const Auth = (props) => {
 
 
     return (
+        <>
+    
         <div className='auth'>
             <p>
                 Sign In with Google to Continue
@@ -35,6 +36,10 @@ const Auth = (props) => {
                 Sign In with Google
             </button>
         </div>
+        
+         
+        </>
+      
     );
 };
 

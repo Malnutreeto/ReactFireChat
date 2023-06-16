@@ -12,6 +12,13 @@ const cookies = new Cookies();
 
 
 function App() {
+
+
+
+
+
+
+
   //imposto come useState di default la presenza o meno del cookie in modo tale da
   // dire al browser che se manca è false
   const [isAuth, setIsAuth] = useState(cookies.get('auth-token'));
@@ -39,7 +46,8 @@ function App() {
   }
   return (
   <>
-    {room ? (
+ 
+  {room ? (
       <Chat room={room}/>
       ) : (
         <div className='room'>
@@ -56,6 +64,7 @@ function App() {
         Sign Out
       </button>
     </div>
+    
   </>)
 }
 
