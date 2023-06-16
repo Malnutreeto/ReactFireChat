@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import Auth from './components/Auth';
 import Cookies from 'universal-cookie';
 import Chat from './components/Chat';
+import { signOut } from 'firebase/auth';
+import { auth } from './firebase-config';
 import './styles/App.css';
 
 const cookies = new Cookies();
@@ -19,6 +21,15 @@ function App() {
   //dobbiamo settare un useRef per prendere esattamente l'elemento che ci serve "modificare"
   const roomInputRef = useRef(null);
 
+  //imposto la funzione di logout
+  const signUserOut = async() => {
+      await signOut(auth);
+      cookies.remove("auth-token");
+      setIsAuth(false);
+      setRoom(null);
+
+  }
+
   if (!isAuth) {
     return (
       <div>
@@ -26,7 +37,8 @@ function App() {
       </div>
     )
   }
-  return (<div>
+  return (
+  <>
     {room ? (
       <Chat room={room}/>
       ) : (
@@ -39,7 +51,12 @@ function App() {
         </div>
       )
     }
-  </div>)
+    <div className='sign-out'>
+      <button onClick={signUserOut}>
+        Sign Out
+      </button>
+    </div>
+  </>)
 }
 
 export default App;
