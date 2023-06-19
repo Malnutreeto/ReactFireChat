@@ -17,10 +17,10 @@ const Chat = (props) => {
   //dico a firebase di ricevere e mostrare i messaggi provenienti da altro utente nella stessa chatroom
   useEffect(() => {
     const queryMessages = query(
-      messageRef, 
-      where("room", "==", room), 
+      messageRef,
+      where("room", "==", room),
       orderBy("createdAt")
-      );
+    );
     const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
       let messages = [];
       snapshot.forEach((doc) => {
