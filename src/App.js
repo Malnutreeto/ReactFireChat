@@ -29,43 +29,47 @@ function App() {
   const roomInputRef = useRef(null);
 
   //imposto la funzione di logout
-  const signUserOut = async() => {
-      await signOut(auth);
-      cookies.remove("auth-token");
-      setIsAuth(false);
-      setRoom(null);
+  const signUserOut = async () => {
+    await signOut(auth);
+    cookies.remove("auth-token");
+    setIsAuth(false);
+    setRoom(null);
 
   }
 
   if (!isAuth) {
     return (
       <div>
-        <Auth setIsAuth={setIsAuth}/>
+        <Auth setIsAuth={setIsAuth} />
       </div>
     )
   }
   return (
-  <>
- 
-  {room ? (
-      <Chat room={room}/>
+    <>
+
+      {room ? (
+        <Chat room={room} />
       ) : (
         <div className='room'>
           <label>Enter Room Name: </label>
-          <input ref={roomInputRef}/>
-
-{/* imposto il ritorno della chatroom col value corrente dell'elemento selezionato con useRef SOLO dopo che clicco sul bottone*/} 
-          <button onClick={() => setRoom(roomInputRef.current.value)}>Enter Chat!</button>
+          <input ref={roomInputRef} />
+          {/* imposto il ritorno della chatroom col value corrente dell'elemento selezionato con useRef SOLO dopo che clicco sul bottone*/}
+          <button
+            className='room-button'
+            onClick={() => setRoom(roomInputRef.current.value)}>
+            Enter Chat!
+          </button>
+          <div >
+            <button
+              className='sign-out'
+              onClick={signUserOut}>
+              Sign Out
+            </button>
+          </div>
         </div>
       )
-    }
-    <div className='sign-out'>
-      <button onClick={signUserOut}>
-        Sign Out
-      </button>
-    </div>
-    
-  </>)
+      }
+    </>)
 }
 
 export default App;
