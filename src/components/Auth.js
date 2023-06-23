@@ -60,7 +60,6 @@ const Auth = (props) => {
                         Sign In with Google to Continue:
                     </p>
                 </Grid>
-
                 <Grid>
                     <button
                         className='auth-button'

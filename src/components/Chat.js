@@ -49,32 +49,39 @@ const Chat = (props) => {
 
 
   return (
-    <div className='chat-app'>
-      <div className='header'>
-        Welcome to: {room.toUpperCase()}
+    <div className='container'>
+      <div className='chat-app'>
+        <div className='header'>
+          Welcome to: {room.toUpperCase()}
+        </div>
+        <div
+          className='messages'>
+          {messages.map((message) => (
+            <div
+              className='message' key={message.id}>
+              <span className='user'>
+                {message.user}:
+              </span>
+              <span>
+                {message.text}
+              </span>
+            </div>
+          ))}
+        </div>
+        <form onSubmit={handleSubmit} className='new-message-form'>
+          <input
+            className='new-message-input'
+            placeholder='Messaggio...'
+            onChange={(e) => setNewMessage(e.target.value)}
+            value={newMessage}
+          />
+          <button type='submit' className='send-button'>
+            Invia
+          </button>
+        </form>
       </div>
-      <div className='messages'>
-        {messages.map((message) => (
-          <div className='message' key={message.id}>
-            <span className='user'>
-              {message.user}
-            </span>
-            {message.text}
-          </div>
-        ))}
-      </div>
-      <form onSubmit={handleSubmit} className='new-message-form'>
-        <input
-          className='new-message-input'
-          placeholder='Messaggio...'
-          onChange={(e) => setNewMessage(e.target.value)}
-          value={newMessage}
-        />
-        <button type='submit' className='send-button'>
-          Invia
-        </button>
-      </form>
     </div>
+
   )
 }
 
