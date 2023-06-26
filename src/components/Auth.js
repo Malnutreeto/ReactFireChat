@@ -39,7 +39,6 @@ const Auth = (props) => {
                 flexDirection="column"
             >
                 <Grid
-                    marginBottom={2}
                     color="#4c983b"
                     display="flex"
                     flexDirection="row"

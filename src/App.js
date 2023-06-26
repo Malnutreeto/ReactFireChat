@@ -58,7 +58,7 @@ function App(props) {
             <button
               onClick={() => setRoom(roomInputRef.current.value)}
               type='submit'>
-              Enter Chat!
+              Enjoy!
             </button>
           </form>
         </Grid >
