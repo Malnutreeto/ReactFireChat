@@ -5,7 +5,7 @@ import Chat from './components/Chat';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
 import { Grid } from '@mui/material';
-import './styles/App.css';
+import './style.scss';
 
 const cookies = new Cookies();
 

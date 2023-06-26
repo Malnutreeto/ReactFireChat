@@ -1,4 +1,3 @@
-import '../styles/Auth.css';
 import { auth, provider } from '../firebase-config.js';
 import { signInWithPopup } from 'firebase/auth';
 import { Grid } from '@mui/material';

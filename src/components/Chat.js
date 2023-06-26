@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where } from 'firebase/firestore';
 import { auth, db } from '../firebase-config';
-import '../styles/Chat.css';
+
 
 
 const Chat = (props) => {
@@ -68,7 +68,7 @@ const Chat = (props) => {
             </div>
           ))}
         </div>
-        <form onSubmit={handleSubmit} className='new-message-form'>
+        <form onSubmit={handleSubmit} >
           <input
             className='new-message-input'
             placeholder='Messaggio...'
