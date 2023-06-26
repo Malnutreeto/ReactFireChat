@@ -12,7 +12,8 @@ const cookies = new Cookies();
 
 
 
-function App() {
+function App(props) {
+
 
   //imposto come useState di default la presenza o meno del cookie in modo tale da
   // dire al browser che se manca è false
@@ -49,7 +50,7 @@ function App() {
         <Grid className='enter-room'>
           <form>
             <label>
-              Enter Room Name: 
+              Hi! Enter your own room name and chat with friends: 
               </label>
             <input
               ref={roomInputRef} />
