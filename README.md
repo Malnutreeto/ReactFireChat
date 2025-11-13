@@ -1,71 +1,36 @@
-# Getting Started with Create React App
+# Real-Time Chat Application (React & Firebase Firestore)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📝 Project Description
 
-## Available Scripts
+This is a simple, real-time web chat application built using **React** for the user interface and **Firebase Firestore** for message persistence and synchronization. Users can create or join chat rooms simply by entering a room name. All users who enter the same room name will share the same conversation in real-time.
 
-In the project directory, you can run:
+The application leverages global variables provided by the execution environment to handle Firebase initialization and anonymous user authentication automatically.
 
-### `npm start`
+## ✨ Key Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* **Real-Time Messaging:** All messages are synchronized instantly among users via Firestore listeners (`onSnapshot`).
+* **Dynamic Room Joining:** Join any chat room simply by typing a name. If the room does not exist, it will be created.
+* **User Identification:** Uses a unique user ID (provided by the authentication system) to distinguish message authors.
+* **Responsive Design:** Clean and adaptable user interface for use on both desktop and mobile devices.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙️ Execution Environment & Deployment
 
-### `npm test`
+This application is designed for deployment to platforms like GitHub Pages *from this environment* without requiring manual configuration of API keys or environment variables.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Automatic Configuration
 
-### `npm run build`
+The app uses three mandatory global variables that are injected automatically by the Canvas platform:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Variable | Purpose |
+| :--- | :--- |
+| `__app_id` | The unique application ID, used to scope the data path in Firestore. |
+| `__firebase_config` | The JSON configuration for initializing the Firebase SDK. |
+| `__initial_auth_token` | The authentication token used to sign in the user for immediate access. |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**No setup is required.** The application initializes Firebase and authenticates the user upon loading.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Firestore Database Structure
 
-### `npm run eject`
+Chat data is stored in the **public collection** to allow all authenticated users to read and write messages to the same room.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# ReactFireChat
+**Collection Path:**
