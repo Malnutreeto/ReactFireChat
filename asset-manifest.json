@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ReactFireChat/static/css/main.94a4859d.css",
-    "main.js": "/ReactFireChat/static/js/main.9055cd4a.js",
-    "index.html": "/ReactFireChat/index.html",
-    "main.94a4859d.css.map": "/ReactFireChat/static/css/main.94a4859d.css.map",
-    "main.9055cd4a.js.map": "/ReactFireChat/static/js/main.9055cd4a.js.map"
+    "main.css": "/reactfirechat/static/css/main.94a4859d.css",
+    "main.js": "/reactfirechat/static/js/main.62a1de5c.js",
+    "index.html": "/reactfirechat/index.html",
+    "main.94a4859d.css.map": "/reactfirechat/static/css/main.94a4859d.css.map",
+    "main.62a1de5c.js.map": "/reactfirechat/static/js/main.62a1de5c.js.map"
   },
   "entrypoints": [
     "static/css/main.94a4859d.css",
-    "static/js/main.9055cd4a.js"
+    "static/js/main.62a1de5c.js"
   ]
 }
