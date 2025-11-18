@@ -1,78 +1,84 @@
-import { auth, provider } from '../firebase-config.js';
-import { signInWithPopup } from 'firebase/auth';
-import { Grid } from '@mui/material';
-import GoogleIcon from '@mui/icons-material/Google';
-import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
+import React from "react";
+import { useState } from "react";
+import { db } from "../firebase-config";
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
+import "../style.scss";
+
+export const Auth = ({ setIsAuth, setUserData }) => {
+    const [tempNick, setTempNick] = useState("");
+    const [tempRoom, setTempRoom] = useState("");
+    const [error, setError] = useState(null);
 
 
-import Cookies from 'universal-cookie';
-const cookies = new Cookies()
-//per settare, prendere e rimuovere cookies dal browser
-
-const Auth = (props) => {
-
-    const { setIsAuth } = props;
-
-
-    const signInWithGoogle = async () => {
-        try {
-            const res = await signInWithPopup(auth, provider);
-            cookies.set('auth-token', res.user.refreshToken);
-            setIsAuth(true);
-            //oltre a settare il token di accesso imposto il reindirizzamento alla pagina per nominare la chatroom
-            //passo setIsAuth da App.js come props e lo richiamo qui come true
-        } catch (error) {
-            console.log(error);
+    const handleEnterChat = async (e) => {
+        e.preventDefault();
+        if (!tempNick.trim() || !tempRoom.trim()) {
+            setError("Please fill in both fields");
+            return;
         }
 
-    };
+        console.log("Starting authentication...");
+
+        const cleanNick = tempNick.trim();
+        const cleanRoom = tempRoom.trim().toUpperCase();
+        const userId = `${cleanRoom}_${cleanNick}`;
 
 
+        try {
+            // 1. CHECK IF NICKNAME EXISTS
+            console.log("checking if user exists...");
+            const userRef = doc(db, "active_users", userId);
+            const docSnap = await getDoc(userRef);
+
+            if (docSnap.exists()) {
+                // Nickname is taken in this room
+                setError(`Nickname "${cleanNick}" is already taken in room ${cleanRoom}.`);
+                return;
+            }
+
+            console.log("Registering user...");
+
+            await setDoc(userRef, {
+                nick: cleanNick,
+                room: cleanRoom,
+                enteredAt: serverTimestamp()
+            });
+
+            console.log("User registered successfully!");
+
+            // 3. SUCCESS: Update App state
+            setUserData({ nick: cleanNick, room: cleanRoom });
+            setIsAuth(true); // Logged in effectively
+            setError(null);
+
+        } catch (err) {
+            console.error("Error joining:", err);
+            setError("Connection error. Please try again.");
+        }
+        
+    }
     return (
-        <>
+        <div className="enter-room">
+            <form onSubmit={handleEnterChat}>
+                <label>Join a Chat Room</label>
 
-            <Grid
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                minHeight="100vh"
-                flexDirection="column"
-            >
-                <Grid
-                    color="#4c983b"
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
-                >
-                    <h1>
-                        Malnutreeto Chatroom
-                    </h1>
-                    <EmojiFoodBeverageIcon
-                            style={{ marginLeft: "10px", fontSize: "30px" }}
-                        />
-                </Grid>
-                <Grid
-                    marginBottom={1}
-                >
-                    <p>
-                        Sign In with Google to Continue:
-                    </p>
-                </Grid>
-                <Grid>
-                    <button
-                        className='auth-button'
-                        onClick={signInWithGoogle}>
-                        <GoogleIcon />
-                    </button>
-                </Grid>
-            </Grid>
-        </>
+                <input
+                    placeholder="Room Name"
+                    onChange={(e) => setTempRoom(e.target.value)}
+                    style={{ marginBottom: '10px' }}
+                />
 
+                <input
+                    placeholder="Choose a Nickname"
+                    onChange={(e) => setTempNick(e.target.value)}
+                />
+
+                <button type="submit">Enter Chat</button>
+
+                {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+            </form>
+        </div>
     );
 };
-
-
-
-
 
 export default Auth;
