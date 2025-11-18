@@ -92,7 +92,8 @@
         margin-top: 40px;
         margin-bottom: 40px;
         border-radius: 5px;
-        overflow: hidden;
+        max-width: 100vw;
+        overflow-x: hidden;
         border: 2px solid #4c983b;
 
         .header {
