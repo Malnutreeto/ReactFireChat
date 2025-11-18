@@ -151,13 +151,21 @@ const Chat = (props) => {
             </div>
           ))}
         </div>
-        <form onSubmit={handleSubmit} style={{ display: 'flex' }} >
-          <input
+        <form onSubmit={handleSubmit} className='new-message-form'>
+          <textarea
             className='new-message-input'
             placeholder='Messaggio...'
             onChange={(e) => setNewMessage(e.target.value)}
             value={newMessage}
-            style={{ flexGrow: 1, padding: '10px', marginRight: '10px' }}
+            rows={1}
+            style={{ 
+                flexGrow: 1, 
+                padding: '10px', 
+                marginRight: '10px',
+                resize: 'none', 
+                minHeight: '40px',
+                maxHeight: '150px',
+            }}
           />
           <button type='submit' className='send-button' style={{ padding: '10px 15px' }}>
             Invia
