@@ -31,7 +31,7 @@ const Chat = (props) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
                 const timestamp = data[room]; 
-                
+
                 if (timestamp) {
                     // Imposta il timestamp (convertito in oggetto Date)
                     setLastExitTime(timestamp.toDate()); 
@@ -64,7 +64,7 @@ const Chat = (props) => {
       where("room", "==", room),
       orderBy("createdAt")
     );
-    
+
     const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
       let fetchedMessages = [];
       snapshot.forEach((doc) => {
@@ -72,7 +72,7 @@ const Chat = (props) => {
         // Convertiamo il Timestamp di Firestore in un oggetto Date per il confronto
         fetchedMessages.push({ ...data, id: doc.id, createdAt: data.createdAt ? data.createdAt.toDate() : new Date() }); 
       });
-      
+
       // LOGICA DI FILTRO: Mostra solo i messaggi arrivati DOPO l'ultima uscita
       const filteredMessages = lastExitTime
         ? fetchedMessages.filter(msg => msg.createdAt > lastExitTime)
@@ -80,12 +80,12 @@ const Chat = (props) => {
 
       setMessages(filteredMessages);
     });
-    
+
     return () => {
       console.log(`Disiscrizione dal listener Firestore per la stanza: ${room}`);
       unsubscribe();
     }
-    
+
   }, [room, lastExitTime]); // lastExitTime è cruciale per aggiornare il filtro quando arriva
 
 
@@ -100,18 +100,23 @@ const Chat = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (newMessage === "") return;
+    if (newMessage.trim() === "") return;
 
-    //comunico a Firebase tutte le informazioni relative al messaggio
-    await addDoc(messageRef, {
-      text: newMessage,
-      createdAt: serverTimestamp(),
-      user: auth.currentUser.displayName,
-      room: room
-    });
+    const messageToSend = newMessage;
+    setNewMessage("");
 
-    //setto nuovamente l'input vuoto dopo l'invio del messaggio 
-    setNewMessage("")
+    try {
+        await addDoc(messageRef, {
+            text: messageToSend,
+            createdAt: serverTimestamp(),
+            user: auth.currentUser.displayName,
+            room: room
+        });
+    } catch (error) {
+        console.error("Error sending message:", error);
+        setNewMessage(messageToSend); 
+        alert("Error sending message, please try again.");
+    }
   };
 
 
@@ -151,21 +156,12 @@ const Chat = (props) => {
             </div>
           ))}
         </div>
-        <form onSubmit={handleSubmit} className='new-message-form'>
+        <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
           <textarea
-            className='new-message-input'
+             className='new-message-input'
             placeholder='Messaggio...'
             onChange={(e) => setNewMessage(e.target.value)}
             value={newMessage}
-            rows={1}
-            style={{ 
-                flexGrow: 1, 
-                padding: '10px', 
-                marginRight: '10px',
-                resize: 'none', 
-                minHeight: '40px',
-                maxHeight: '150px',
-            }}
           />
           <button type='submit' className='send-button' style={{ padding: '10px 15px' }}>
             Invia

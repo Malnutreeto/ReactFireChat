@@ -4,7 +4,7 @@ import App from './App';
 //tema scuro
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { myTheme, myThemeTheme } from './components/Theme';
+import { myTheme } from './components/Theme';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
