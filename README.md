@@ -1,7 +1,7 @@
 # Real-Time Chat Application (React & Firebase Firestore)
 
 ## 🌐 Live Demo
-**[View Live Application](https://malnutreeto.github.io/ReactFireChat/)**
+**[View Live Application](https://ematrito.github.io/ReactFireChat/)**
 
 ## 📝 Project Description
 
