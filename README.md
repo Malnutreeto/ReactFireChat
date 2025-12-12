@@ -1,8 +1,5 @@
 # Real-Time Chat Application (React & Firebase Firestore)
 
-## 🌐 Live Demo
-**[View Live Application](https://ematrito.github.io/ReactFireChat/)**
-
 ## 📝 Project Description
 
 This is a simple, real-time web chat application built using **React** for the user interface and **Firebase Firestore** for message persistence and synchronization. Users can create or join chat rooms simply by entering a room name. All users who enter the same room name will share the same conversation in real-time.
